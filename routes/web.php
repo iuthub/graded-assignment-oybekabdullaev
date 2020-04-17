@@ -13,6 +13,38 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('todolist.index');
+Route::get('/', [
+  'uses' => 'TasksController@getIndex',
+  'as' => 'index'
+]);
+
+
+Route::group([
+  'prefix'=>'admin'
+], function() {
+
+    Route::get('/', [
+      'uses' => 'TasksController@getAdminIndex',
+      'as' => 'adminIndex'
+    ]);
+
+    Route::get('/edit/{id}', [
+      'uses' => 'TasksController@getAdminEdit',
+      'as' => 'adminEdit'
+    ]);
+
+    Route::post('/edit', [
+      'uses' => 'TasksController@postAdminEdit',
+      'as' => 'adminEditPost'
+    ]);
+    
+    Route::get('/delete/{id}', [
+      'uses' => 'TasksController@getAdminDelete',
+      'as' => 'adminDelete'
+    ]);
+
+    Route::post('/', [
+      'uses' => 'TasksController@postAdminCreate',
+      'as' => 'adminCreatePost'
+    ]);
 });

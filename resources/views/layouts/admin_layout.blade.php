@@ -15,7 +15,7 @@
         
     </head>
     <body>
-      @include('partials.navbar')
+      @include('partials.admin_navbar')
 
       <div class="main">
         @yield('content')
